@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <script>
+        
+        </script>
+    </head>
+    <body>
+        <form>
+            <div>
+                all units in inches or degrees
+
+                Foobar!
+            </div>
+            <div>
+                <label for="nominalHeight">nominal height</label>
+                <input type="text" name="nominalHeight" id="nominalHeight" value="96"/>
+            </div>
+            <div>
+                <label for="floorDiameter">floor diameter</label>
+                <input type="text" name="floorDiameter" id="floorDiameter"/>
+            </div>
+            <div>
+                <label for="memberThickness">member thickness</label>
+                <input type="text" name="memberThickness" id="memberThickness"/>
+            </div>
+            <div>
+                <label for="memberLength">member length</label>
+                <input type="text" name="memberLength" id="memberLength"/>
+            </div>
+            <div>
+                <label for="memberAngle">member angle</label>
+                <input type="text" name="memberAngle" id="memberAngle"/>
+            </div>
+            <div>
+                <button type="button" onclick="recalculate();">recalculate</button>
+            </div>
+            <div id="calculatedDims">
+                <div>
+                    <label for="actualHeight">actual height</label>
+                    <input type="text" name="actualHeight" id="actualHeight" readonly/>
+                </div>
+                <div>
+                    <label for="numberOfVerticalSlices">number Of Vertical Slices</label>
+                    <input type="text" name="numberOfVerticalSlices" id="numberOfVerticalSlices" readonly/>
+                </div>
+                <div>
+                    <label for="sphereRadius">sphere radius</label>
+                    <input type="text" name="sphereRadius" id="sphereRadius" readonly/>
+                </div>
+            </div>
+
+            <div id="cutSheet">
+
+            </div>
+        </form>
+    </body>
+    <script>
+
+        //user defined parameters
+        let nominalHeight;
+        let floorDiameter;
+        let memberThickness;
+        let memberLength;
+        let memberAngle;
+
+        //calculated parameters
+        let actualHeight;
+        let halfActualHeight;
+        let numberOfVerticalSlices;
+        let sphereRadius;
+
+        function recalculate(){
+            nominalHeight = document.getElementById('nominalHeight').value;
+            floorDiameter = document.getElementById('floorDiameter').value;
+            memberThickness = document.getElementById('memberThickness').value;
+            memberLength = document.getElementById('memberLength').value;
+            memberAngle = document.getElementById('memberAngle').value;
+
+            if(nominalHeight && floorDiameter && memberThickness && memberLength && memberAngle ){
+                
+                actualHeight = nominalHeight - ( nominalHeight % memberThickness );
+                halfActualHeight = ( actualHeight / memberThickness ) * 1;
+                numberOfVerticalSlices = ( actualHeight / memberThickness ) * 1;
+                sphereRadius = 'implement';
+
+                document.getElementById('actualHeight').value = actualHeight;
+                document.getElementById('numberOfVerticalSlices').value = numberOfVerticalSlices;
+                document.getElementById('sphereRadius').value = sphereRadius;
+            }
+        }
+
+        recalculate();
+
+    </script>
+</html>
